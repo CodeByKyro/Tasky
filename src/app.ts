@@ -8,4 +8,4 @@ import { UI } from './Services/UI.js';
 // Form Button Event Listener
 FormElements.taskForm.addEventListener('submit', UI.addTask);
 
-// window.addEventListener('DOMContentLoaded', UI.displayTasks);
+window.addEventListener('DOMContentLoaded', UI.displayTasks);

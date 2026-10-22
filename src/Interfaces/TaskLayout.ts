@@ -1,5 +1,6 @@
 export interface TaskLayout {
     type: string,
     task: string,
-    isComplete: boolean
+    isComplete: boolean,
+    id: string
 };

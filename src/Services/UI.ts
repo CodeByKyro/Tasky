@@ -2,6 +2,8 @@ import { TaskInfo } from '../Classes/TaskInfo.js';
 import '../Components/TaskItem.js';
 import { FormElements } from "../Elements/FormElements.js";
 import { TaskListElements } from '../Elements/TaskListElements.js';
+import { TaskLayout } from '../Interfaces/TaskLayout.js';
+import { Store } from './Store.js';
 
 export class UI {
     static addTask(e: Event): void {
@@ -9,11 +11,14 @@ export class UI {
 
         const listItem: HTMLLIElement = document.createElement('li');
 
+        // Get form input data
         const type: string = FormElements.urgencySelector.value;
         const task: string = FormElements.taskInput.value;
 
+        // Create task info object to store the data
         const taskInfo = new TaskInfo(type, task);
 
+        // create task item, set data and render the task
         const taskItem = document.createElement('task-item');
 
         listItem.append(taskItem);
@@ -22,32 +27,69 @@ export class UI {
 
         taskItem.setTask(taskInfo);
 
-        taskItem.querySelector('input[type="checkbox"]')!.addEventListener('change', UI.markTask);
 
-        taskItem.querySelector('.remove-btn')!.addEventListener('click', UI.removeTask);
+        // Add EventListener to the checkbox
+        taskItem.querySelector('input[type="checkbox"]')!.addEventListener('change', () => {
+            UI.markTask(taskInfo.id, listItem)
+        });
+
+        // Add EventListener to the remove button
+        taskItem.querySelector('.remove-btn')!.addEventListener('click', () => {
+            UI.removeTask(taskInfo.id, listItem)
+        });
+
+        Store.setTask(taskInfo);
 
         console.log(type, task);
-    }
+    };
 
-    private static markTask(e: Event): void {
-        const checkBox = e.currentTarget as HTMLInputElement;
-
-        const taskListItem = checkBox.closest('li')!;
-
+    private static markTask(id: string, listItem: HTMLElement): void {
+        const checkBox = listItem.querySelector('input[type="checkbox"]') as HTMLInputElement;
 
         const destinationList = checkBox.checked ? 
         TaskListElements.completedTaskList
         : 
         TaskListElements.pendingTaskList;
 
-        destinationList.append(taskListItem);
-    }
+        destinationList.append(listItem);
 
-    private static removeTask(e: Event) {
-        const removeBtn = e.currentTarget as HTMLButtonElement;
+        Store.changeStatus(id);
+    };
 
-        const taskListItem = removeBtn.closest('li') as HTMLLIElement;
+    private static removeTask(id: string, listItem: HTMLElement): void {
+        listItem.remove();
+        Store.rmTask(id);
+    };
 
-        taskListItem.remove();
+    static displayTasks() {
+        const taskList = Store.getTask();
+   
+        taskList.forEach( (task: TaskLayout) => {
+            const listItem = document.createElement('li') as HTMLLIElement;
+    
+            const taskItem = document.createElement('task-item');
+
+            listItem.append(taskItem);
+
+            const destinationList = 
+            task.isComplete ?
+            TaskListElements.completedTaskList
+            :
+            TaskListElements.pendingTaskList;
+
+            destinationList.append(listItem);
+
+            taskItem.setTask(task);
+
+            // Add EventListener to the checkbox
+            taskItem.querySelector('input[type="checkbox"]')!.addEventListener('change', () => {
+                UI.markTask(task.id, listItem)
+            });
+
+            // Add EventListener to the remove button
+            taskItem.querySelector('.remove-btn')!.addEventListener('click', () => {
+                UI.removeTask(task.id, listItem)
+            });
+            });
     }
 };
