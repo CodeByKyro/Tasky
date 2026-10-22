@@ -220,3 +220,32 @@ footer {
     flex: 0 0 auto;
     margin-inline-start: auto;
 }
+
+.notification {
+    position: fixed;
+    z-index: 10;
+    inset-inline-end: max(1rem, env(safe-area-inset-right));
+    inset-block-end: max(1rem, env(safe-area-inset-bottom));
+    width: max-content;
+    max-width: calc(100vw - 2rem);
+
+    & p {
+        padding: 0.9rem 1.2rem;
+        border: 1px solid transparent;
+        border-radius: 0.5rem;
+        color: white;
+        font-weight: 600;
+        overflow-wrap: anywhere;
+        box-shadow: 0 0.4rem 1.2rem rgb(31 41 51 / 20%);
+    }
+
+    & .success {
+        border-color: #176b2c;
+        background-color: #24803c;
+    }
+
+    & .error {
+        border-color: #8f1d16;
+        background-color: #b42318;
+    }
+}

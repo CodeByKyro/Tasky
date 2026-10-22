@@ -1,67 +1,74 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./styling/AppStyle.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styling/AppStyle.css" />
     <script type="module" src="./public/app.js" defer></script>
     <title>TaskyApp</title>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <h1>Tasky</h1>
+      <h1>Tasky</h1>
     </header>
 
     <div class="wrapper">
-        <main>
-            <section class="task-creation">
-                <h2> Create Task</h2>
-    
-                <div>
-                    <form id="task-form">
-                        <div class="task-form-container">
-                            <div class="form-field">
-                                <select name="task-urgency" id="type">
-                                    <option value="Urgent">Urgent</option>
-                                    <option value="Important">Important</option>
-                                    <option value="Normal">Normal</option>
-                                </select>
-                            </div>
-                            <div class="form-field">
-                                <input type="text" name="task" id="task-input" placeholder="Enter Task">
-                            </div>
-                            <div class="form-field">
-                                <button type="submit" id="createBtn">Create Task</button>
-                            </div>
-                        </div>
-                    </form>
+      <main>
+        <section class="task-creation">
+          <h2>Create Task</h2>
+
+          <div>
+            <form id="task-form">
+              <div class="task-form-container">
+                <div class="form-field">
+                  <select name="task-urgency" id="type">
+                    <option value="" disabled selected>Choose urgency</option>
+                    <option value="Urgent">Urgent</option>
+                    <option value="Important">Important</option>
+                    <option value="Normal">Normal</option>
+                  </select>
                 </div>
-            </section>
-    
-            <section class="tasks">
-                <h2> Tasks </h2>
-    
-                <div class="task-container">
-                    <!-- Lists for tasks, either completed or pending -->
-                    <div class="pending-tasks">
-                        <h3>Pending Tasks</h3>
-    
-                        <ul class="pending-task-list"></ul>
-                    </div>
-    
-    
-                    <div class="completed-tasks">
-                        <h3>Completed Tasks</h3>
-    
-                        <ul class="completed-task-list"></ul>
-                    </div>
+                <div class="form-field">
+                  <input
+                    type="text"
+                    name="task"
+                    id="task-input"
+                    placeholder="Enter Task"
+                  />
                 </div>
-            </section>
-        </main>
+                <div class="form-field">
+                  <button type="submit" id="createBtn">Create Task</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </section>
+
+        <section class="tasks">
+          <h2>Tasks</h2>
+
+          <div class="task-container">
+            <!-- Lists for tasks, either completed or pending -->
+            <div class="pending-tasks">
+              <h3>Pending Tasks</h3>
+
+              <ul class="pending-task-list"></ul>
+            </div>
+
+            <div class="completed-tasks">
+              <h3>Completed Tasks</h3>
+
+              <ul class="completed-task-list"></ul>
+            </div>
+          </div>
+        </section>
+      </main>
     </div>
 
     <footer>
-        <p>Tasky &copy; 2026</p> 
+      <p>Tasky &copy; 2026</p>
     </footer>
-</body>
+
+    <div id="notification" class="notification"></div>
+  </body>
 </html>
