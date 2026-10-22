@@ -1,0 +1,222 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+body {
+    min-height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f4f7f4;
+}
+
+header {
+    padding: 1.3rem max(1rem, calc((100% - 72rem) / 2));
+    margin-block-end: 1.5rem;
+    background-color: #005a00;
+}
+
+h1 {
+    color: white;
+    font-size: 2.5rem;
+}
+
+h2 {
+    margin-block-end: 1rem;
+    color: #005a00;
+}
+
+h3 {
+    margin-block-end: 0.75rem;
+    color: #26332a;
+}
+
+section {
+    margin-block-end: 2rem;
+}
+
+footer {
+    padding: 1.5rem 1rem;
+    color: #005a00;
+    text-align: center;
+}
+
+.wrapper {
+    width: calc(100% - 2rem);
+    max-width: 72rem;
+    margin-inline: auto;
+    padding: clamp(1rem, 3vw, 2rem);
+    border: 1px solid #d5e0d5;
+    border-radius: 0.75rem;
+    background-color: #fff;
+    box-shadow: 0 0.5rem 1.5rem rgb(31 41 51 / 8%);
+}
+
+.task-creation {
+    padding-block: 0.5rem 1rem;
+}
+
+.task-form-container {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.75rem;
+    width: 100%;
+
+    @media (width > 600px) {
+        display: flex;
+        flex-wrap: wrap;
+
+        & .form-field:nth-child(2) {
+            flex: 1 1 12rem;
+        }
+    }
+}
+
+.form-field {
+    min-width: 0;
+}
+
+.form-field input,
+.form-field select,
+.form-field button {
+    min-height: 2.75rem;
+    padding: 0.6rem 0.8rem;
+    border: 1px solid #bdc9bd;
+    border-radius: 0.4rem;
+    font: inherit;
+}
+
+.form-field input {
+    width: 100%;
+}
+
+.form-field input:focus-visible {
+    border: 2px solid #004600;
+}
+
+.form-field select,
+.form-field button {
+    width: 100%;
+
+    @media (width > 600px) {
+        width: auto;
+    }
+}
+
+.form-field button {
+    color: white;
+    background-color: #005a00;
+    cursor: pointer;
+}
+
+.form-field button:hover {
+    background-color: #004600;
+}
+
+.form-field select {
+    color: #004600;
+}
+
+.task-container {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.25rem;
+
+    @media (width > 600px) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+.pending-tasks,
+.completed-tasks {
+    min-width: 0;
+    padding: 1rem;
+    border: 1px solid #d5e0d5;
+    border-radius: 0.6rem;
+    background-color: #f9fbf9;
+}
+
+.pending-task-list,
+.completed-task-list {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.pending-task-list li,
+.completed-task-list li {
+    min-width: 0;
+}
+
+.task {
+    max-height: 12rem;
+    overflow: auto;
+    padding: 0.9rem;
+    border: 1px solid #d5e0d5;
+    border-inline-start: 0.3rem solid #b77800;
+    border-radius: 0.4rem;
+    background-color: white;
+    overflow-wrap: anywhere;
+    scrollbar-gutter: stable;
+}
+
+.completed-tasks .task {
+    border-inline-start-color: #24803c;
+}
+
+.task h4 {
+    margin-block-end: 0.5rem;
+    color: #005a00;
+}
+
+.task-content {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.task-content input[type="checkbox"] {
+    order: -1;
+    flex: 0 0 auto;
+    width: 1.1rem;
+    height: 1.1rem;
+    margin-block-start: 0.15rem;
+    accent-color: #005a00;
+}
+
+.task-content p {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+.remove-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2rem;
+    min-height: 2rem;
+    padding: 0.35rem 0.6rem;
+    border: 1px solid #b42318;
+    border-radius: 0.4rem;
+    color: white;
+    background-color: #c62828;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+
+    &:hover {
+        border-color: #8f1d16;
+        background-color: #a91f1f;
+    }
+
+    &:focus-visible {
+        outline: 3px solid #f4a6a1;
+        outline-offset: 2px;
+    }
+}
+
+.task-content .remove-btn {
+    flex: 0 0 auto;
+    margin-inline-start: auto;
+}
