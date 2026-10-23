@@ -5,20 +5,19 @@ import { NotificationElements } from "../Elements/NotificationElement.js";
 import { TaskListElements } from "../Elements/TaskListElements.js";
 import { TaskLayout } from "../Interfaces/TaskLayout.js";
 import { Store } from "./Store.js";
-import { NotificationMsg } from '../Interfaces/NotificationMessage.js'
-import { NotificationColors } from '../Interfaces/NotificationMessage.js'
 
 
-const messages: NotificationMsg = {
-    successMsg: 'Task Created Successfully',
-    errorMsg: 'Please Enter Task and Choose Urgency',
-    completionMsg: 'Task Completed Successfully',
-    removalMsg: 'Task Removed Successfully'
+
+enum NotificationMsg {
+    successMsg= 'Task Created Successfully',
+    errorMsg= 'Please Enter Task and Choose Urgency',
+    completionMsg= 'Task Completed Successfully',
+    removalMsg= 'Task Removed Successfully'
 }
 
-const colors: NotificationColors = {
-    success: 'success',
-    error: 'error'
+enum NotificationColors {
+    success= 'success',
+    error= 'error'
 }
 
 export class UI {
@@ -65,10 +64,10 @@ export class UI {
             
 
 
-            UI.notificationMsg(messages.successMsg, colors.success)
+            UI.notificationMsg(NotificationMsg.successMsg, NotificationColors.success)
         }
         else {
-            UI.notificationMsg(messages.errorMsg, colors.error);
+            UI.notificationMsg(NotificationMsg.errorMsg, NotificationColors.error);
         }
     }
 
@@ -77,7 +76,7 @@ export class UI {
 
     const destinationList = checkBox.checked ? TaskListElements.completedTaskList : TaskListElements.pendingTaskList;
 
-    checkBox.checked ? UI.notificationMsg(messages.completionMsg, colors.success) : null;
+    checkBox.checked ? UI.notificationMsg(NotificationMsg.completionMsg, NotificationColors.success) : null;
 
     destinationList.append(listItem);
 
@@ -87,7 +86,7 @@ export class UI {
   private static removeTask(id: string, listItem: HTMLElement): void {
     listItem.remove();
     Store.rmTask(id);
-    UI.notificationMsg(messages.removalMsg, colors.success);
+    UI.notificationMsg(NotificationMsg.removalMsg, NotificationColors.success);
   }
 
   static displayTasks() {

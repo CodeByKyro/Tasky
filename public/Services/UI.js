@@ -4,16 +4,18 @@ import { FormElements } from "../Elements/FormElements.js";
 import { NotificationElements } from "../Elements/NotificationElement.js";
 import { TaskListElements } from "../Elements/TaskListElements.js";
 import { Store } from "./Store.js";
-const messages = {
-    successMsg: 'Task Created Successfully',
-    errorMsg: 'Please Enter Task and Choose Urgency',
-    completionMsg: 'Task Completed Successfully',
-    removalMsg: 'Task Removed Successfully'
-};
-const colors = {
-    success: 'success',
-    error: 'error'
-};
+var NotificationMsg;
+(function (NotificationMsg) {
+    NotificationMsg["successMsg"] = "Task Created Successfully";
+    NotificationMsg["errorMsg"] = "Please Enter Task and Choose Urgency";
+    NotificationMsg["completionMsg"] = "Task Completed Successfully";
+    NotificationMsg["removalMsg"] = "Task Removed Successfully";
+})(NotificationMsg || (NotificationMsg = {}));
+var NotificationColors;
+(function (NotificationColors) {
+    NotificationColors["success"] = "success";
+    NotificationColors["error"] = "error";
+})(NotificationColors || (NotificationColors = {}));
 export class UI {
     static addTask(e) {
         e.preventDefault();
@@ -42,23 +44,23 @@ export class UI {
             Store.setTask(taskInfo);
             FormElements.taskInput.value = '';
             FormElements.urgencySelector.value = '';
-            UI.notificationMsg(messages.successMsg, colors.success);
+            UI.notificationMsg(NotificationMsg.successMsg, NotificationColors.success);
         }
         else {
-            UI.notificationMsg(messages.errorMsg, colors.error);
+            UI.notificationMsg(NotificationMsg.errorMsg, NotificationColors.error);
         }
     }
     static markTask(id, listItem) {
         const checkBox = listItem.querySelector('input[type="checkbox"]');
         const destinationList = checkBox.checked ? TaskListElements.completedTaskList : TaskListElements.pendingTaskList;
-        checkBox.checked ? UI.notificationMsg(messages.completionMsg, colors.success) : null;
+        checkBox.checked ? UI.notificationMsg(NotificationMsg.completionMsg, NotificationColors.success) : null;
         destinationList.append(listItem);
         Store.changeStatus(id);
     }
     static removeTask(id, listItem) {
         listItem.remove();
         Store.rmTask(id);
-        UI.notificationMsg(messages.removalMsg, colors.success);
+        UI.notificationMsg(NotificationMsg.removalMsg, NotificationColors.success);
     }
     static displayTasks() {
         const taskList = Store.getTask();
